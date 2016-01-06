@@ -13,7 +13,8 @@ Contents:
 
    Intro
    Import
-   ...
+
+.. automodule:: Atmos
 
 Indices and tables
 ==================

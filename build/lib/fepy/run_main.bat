@@ -1,0 +1,1 @@
+python fepy_main.py X:\data\raw\RapidEye\L1B\hai\2014-03-12T112150_RE2_1B-NAC_19304471_294431\2014-03-12T112150_RE2_1B-NAC_19304471_294431\2014-03-12T112150_RE2_1B-NAC_19304471_294431_metadata.xml D:tmp\2014-03-12T112150_RE2_1B-NAC_19304471_294431.tif Z:\Aktuell\Projekte\BioDiv\data\final\raster\dem\hai\dtm5_hai_tsi_utm32n_int32.tif

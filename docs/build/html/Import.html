@@ -35,6 +35,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="Intro.html" title="Introduction"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">FEPy 0.0.1 documentation</a> &raquo;</li> 
@@ -48,6 +51,101 @@
             
   <div class="section" id="import-module">
 <h1>Import Module<a class="headerlink" href="#import-module" title="Permalink to this headline">¶</a></h1>
+<p>The classes in this module provide functions for importing Satellite images</p>
+<span class="target" id="module-Import.read_xml_rapideye"></span><dl class="class">
+<dt id="Import.read_xml_rapideye.MetaData">
+<em class="property">class </em><tt class="descclassname">Import.read_xml_rapideye.</tt><tt class="descname">MetaData</tt><a class="headerlink" href="#Import.read_xml_rapideye.MetaData" title="Permalink to this definition">¶</a></dt>
+<dd><p>A generic class for storing the remote sensing metadata information</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="Import.read_xml_rapideye.MetaDataRapidEye">
+<em class="property">class </em><tt class="descclassname">Import.read_xml_rapideye.</tt><tt class="descname">MetaDataRapidEye</tt><a class="headerlink" href="#Import.read_xml_rapideye.MetaDataRapidEye" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for importing and storing RapidEye Metadata</p>
+<p class="rubric">Methods</p>
+<dl class="classmethod">
+<dt id="Import.read_xml_rapideye.MetaDataRapidEye.import_rapideye_metadata">
+<em class="property">classmethod </em><tt class="descname">import_rapideye_metadata</tt><big>(</big><em>o</em>, <em>filename</em><big>)</big><a class="headerlink" href="#Import.read_xml_rapideye.MetaDataRapidEye.import_rapideye_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports Metadata from Rapideye metadata XML File</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-Import.fep_importL1B"></span><p>Import RapidEye L1B images</p>
+<dl class="class">
+<dt id="Import.fep_importL1B.ImportL1B">
+<em class="property">class </em><tt class="descclassname">Import.fep_importL1B.</tt><tt class="descname">ImportL1B</tt><a class="headerlink" href="#Import.fep_importL1B.ImportL1B" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for importing RapidEye L1B  images</p>
+<p class="rubric">Methods</p>
+<dl class="classmethod">
+<dt id="Import.fep_importL1B.ImportL1B.ConvertFileName">
+<em class="property">classmethod </em><tt class="descname">ConvertFileName</tt><big>(</big><em>infile</em>, <em>band</em><big>)</big><a class="headerlink" href="#Import.fep_importL1B.ImportL1B.ConvertFileName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to find the ntf file from the xml file</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="Import.fep_importL1B.ImportL1B.OrthoRectifyRaster">
+<em class="property">classmethod </em><tt class="descname">OrthoRectifyRaster</tt><big>(</big><em>InRaster</em>, <em>OutRaster</em>, <em>InDEM</em><big>)</big><a class="headerlink" href="#Import.fep_importL1B.ImportL1B.OrthoRectifyRaster" title="Permalink to this definition">¶</a></dt>
+<dd><p>RPC based orthorectification</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>InRaster</strong> (<em>string</em>) &#8211; Full path to the L1B ntf file</li>
+<li><strong>InDEM</strong> (<em>string</em>) &#8211; Full path to the DEM file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Full path the orthorectified tif file</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="Import.fep_importL1B.ImportL1B.ReadRaster">
+<em class="property">classmethod </em><tt class="descname">ReadRaster</tt><big>(</big><em>infile</em><big>)</big><a class="headerlink" href="#Import.fep_importL1B.ImportL1B.ReadRaster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read Raster into array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>infile</strong> &#8211; Full path to the raster file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">array with the DN values</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Numpy ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="Import.fep_importL1B.ImportL1B.Reproject">
+<em class="property">classmethod </em><tt class="descname">Reproject</tt><big>(</big><em>inRaster</em>, <em>outRaster</em>, <em>EPSG</em><big>)</big><a class="headerlink" href="#Import.fep_importL1B.ImportL1B.Reproject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reprojects rasters using GDAL</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>inRaster</strong> &#8211; Full path to the input image</li>
+<li><strong>outRaster</strong> (<em>string</em>) &#8211; Full path to the image to projected outputimage</li>
+<li><strong>EPSG</strong> (<em>string</em>) &#8211; Standard EPSG code for the output raster</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -88,6 +186,9 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="Intro.html" title="Introduction"
              >previous</a> |</li>
         <li><a href="index.html">FEPy 0.0.1 documentation</a> &raquo;</li> 
@@ -95,7 +196,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2016, Paul Magdon.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>
