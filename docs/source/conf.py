@@ -32,7 +32,7 @@ sys.path.append(os.path.join(os.path.dirname(__name__), '..\\fepy'))
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.mathjax',
-    'sphinxcontrib.napoleon'
+    'numpydoc'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
