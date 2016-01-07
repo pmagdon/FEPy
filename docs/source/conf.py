@@ -16,7 +16,8 @@ import sys
 import os
 import mock
 
-MOCK_MODULES = ['numpy', 'osgeo','osgeo.gdal','gdalconst','rasterio','lxml','datetime']
+#MOCK_MODULES = ['numpy', 'osgeo','osgeo.gdal','gdalconst','rasterio','lxml','datetime']
+MOCK_MODULES = ['osgeo','osgeo.gdal','gdalconst','rasterio','lxml','datetime']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 
