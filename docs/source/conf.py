@@ -22,7 +22,7 @@ class Mock(MagicMock):
             return Mock()
 
 #MOCK_MODULES = ['numpy', 'osgeo','osgeo.gdal','gdalconst','rasterio','lxml','datetime']
-MOCK_MODULES = ['osgeo','osgeo.gdal','gdalconst','rasterio','lxml','datetime']
+MOCK_MODULES = ['osgeo','osgeo.gdal','gdalconst','rasterio','lxml']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
 
