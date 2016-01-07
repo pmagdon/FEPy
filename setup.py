@@ -18,7 +18,7 @@ setup(
     keywords = "Remote Sensing, Image Processing",
     url = "http://134.76.194.191/wordpress/",
     packages=find_packages(),
-    install_requires = ['gdal>=1.11','lxml','datetime','rasterio'],
+    #install_requires = ['gdal>=1.11','lxml','datetime','rasterio'],
     long_description=read('README'),
     classifiers=[
         "Development Status :: 3 - Alpha",
