@@ -7,14 +7,16 @@ Welcome to FEPy's documentation
 ================================
 
 Contents:
+--------
 
 .. toctree::
    :maxdepth: 2
 
    Intro
-   Import
+   Installation
+   Structure
+   Modules
 
-.. automodule:: Atmos
 
 Indices and tables
 ==================
