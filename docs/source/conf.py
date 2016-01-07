@@ -21,7 +21,6 @@ class Mock(MagicMock):
     def __getattr__(cls, name):
             return Mock()
 
-#MOCK_MODULES = ['numpy', 'osgeo','osgeo.gdal','gdalconst','rasterio','lxml','datetime']
 MOCK_MODULES = ['osgeo','osgeo.gdal','gdalconst','rasterio','lxml']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
@@ -42,7 +41,8 @@ sys.path.append(os.path.join(os.path.dirname(__name__), '..\\fepy'))
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.mathjax'
+    'sphinx.ext.mathjax',
+    'numpydoc'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
