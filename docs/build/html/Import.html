@@ -62,7 +62,6 @@
 <dt id="Import.read_xml_rapideye.MetaDataRapidEye">
 <em class="property">class </em><code class="descclassname">Import.read_xml_rapideye.</code><code class="descname">MetaDataRapidEye</code><a class="headerlink" href="#Import.read_xml_rapideye.MetaDataRapidEye" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class for importing and storing RapidEye Metadata</p>
-<p class="rubric">Methods</p>
 <dl class="classmethod">
 <dt id="Import.read_xml_rapideye.MetaDataRapidEye.import_rapideye_metadata">
 <em class="property">classmethod </em><code class="descname">import_rapideye_metadata</code><span class="sig-paren">(</span><em>o</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#Import.read_xml_rapideye.MetaDataRapidEye.import_rapideye_metadata" title="Permalink to this definition">¶</a></dt>
@@ -76,7 +75,6 @@
 <dt id="Import.fep_importL1B.ImportL1B">
 <em class="property">class </em><code class="descclassname">Import.fep_importL1B.</code><code class="descname">ImportL1B</code><a class="headerlink" href="#Import.fep_importL1B.ImportL1B" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for importing RapidEye L1B  images</p>
-<p class="rubric">Methods</p>
 <dl class="classmethod">
 <dt id="Import.fep_importL1B.ImportL1B.ConvertFileName">
 <em class="property">classmethod </em><code class="descname">ConvertFileName</code><span class="sig-paren">(</span><em>infile</em>, <em>band</em><span class="sig-paren">)</span><a class="headerlink" href="#Import.fep_importL1B.ImportL1B.ConvertFileName" title="Permalink to this definition">¶</a></dt>
@@ -115,17 +113,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>infile</strong> : str</p>
-<blockquote>
-<div><p>Full path to the raster file</p>
-</div></blockquote>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>InFile</strong> (<em>string</em>) &#8211; Full path to raster that should be imported</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>array</strong> : ndarray</p>
-<blockquote class="last">
-<div><p>numpy ndarray with the DN values</p>
-</div></blockquote>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">2D Array with pixel values</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy2d Array</td>
 </tr>
 </tbody>
 </table>
@@ -140,18 +132,11 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>inRaster</strong> : str</p>
-<blockquote>
-<div><p>Full path to the input image</p>
-</div></blockquote>
-<p><strong>outRaster</strong> : str</p>
-<blockquote>
-<div><p>Full path to the image to projected outputimage</p>
-</div></blockquote>
-<p><strong>EPSG</strong> : str</p>
-<blockquote class="last">
-<div><p>Standard EPSG code for the output raster</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>inRaster</strong> &#8211; Full path to raster that should be reprojected</li>
+<li><strong>outRaster</strong> &#8211; Full path where reprojected raster is stored</li>
+<li><strong>EPSG</strong> (<em>string</em>) &#8211; EPSG Code of the target raster</li>
+</ul>
 </td>
 </tr>
 </tbody>
