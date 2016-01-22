@@ -11,6 +11,7 @@ import argparse
 import os
 from osgeo import gdal
 from osgeo import gdalconst
+from fepy.Import import image
 
 class ImportL1B:
     """ Class for importing RapidEye L1B  images
@@ -52,6 +53,16 @@ class ImportL1B:
         #return OutRaster
 
     @classmethod
+    def ClipRaster(cls,InRaster, OutRaster, EPSG,AOI):
+
+        com = " ".join(["gdalwarp -overwrite -ot UInt16 -multi -cutline "+AOI +" -crop_to_cutline -t_srs EPSG:"+str(EPSG), InRaster, OutRaster])
+        print com
+        tmp=os.system(com)
+        print tmp
+        if tmp !=0:
+          raise Exception("Could not clip the image ")
+
+    @classmethod
     def MultiLayerStack(cls,InRasters,OutRaster):
         """ Creates a multilayer stack
         :return:
@@ -87,6 +98,28 @@ class ImportL1B:
             nBands = (src.indexes)
             array = src.read_band(1)
             return array
+        #except:
+        #    raise ImportError("Can not read band")
+
+    @classmethod
+    def import_L1B(cls,infile):
+        """ Read Raster into image object
+
+        :param InFile: Full path to raster that should be imported
+        :type InFile: string
+        :return: Image object
+        :rtype: Image object
+
+        """
+        try:
+            import gdal
+            import rasterio
+        except:
+            raise ImportError("Can not import module GDAL or RasterIO")
+
+
+        image=image()
+
         #except:
         #    raise ImportError("Can not read band")
 
