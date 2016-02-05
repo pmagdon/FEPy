@@ -1,7 +1,12 @@
+"""
+Main file for pre-processing of L1b RapidEye images
+"""
+
 import os
 import os.path
 from glob import glob
 from fepy.Ortho import Orthorectify_RapidEye_L1B
+from fepy.Registration import image2image
 
 
 files = []
@@ -18,6 +23,31 @@ file=files[0]
 basename=os.path.splitext(os.path.basename(file))[0]
 outfile=(outdir+basename+'_L3A1.tif').replace("_metadata","")
 test=Orthorectify_RapidEye_L1B.PreProcess.PreProcess(file,outfile,dem,aoi)
+
+
+dem = "F:/projects/biodiv/final/raster/dem/alb/dtmAlb_clip_lat_long_wgs84.tif"
+master = "F:/projects/biodiv/edit/imageAnalysis/Registration/test/ALB_2015-08-08_sub.tif"
+slave = "F:/projects/biodiv/edit/imageAnalysis/Registration/test/ALB_2015-10-02_sub.tif"
+slave_nogeom = "F:/projects/biodiv/edit/imageAnalysis/Registration/test/ALB_2015-10-02_sub_no_geom.tif"
+PointsFile = "F:/projects/biodiv/edit/imageAnalysis/Registration/homologous_points.txt"
+StatsFile = os.path.splitext(PointsFile)[0]+".stats"
+PixelPointsFile = "F:/projects/biodiv/edit/imageAnalysis/Registration/homologous_points_pixel.txt"
+FilteredPixelPointsFile = "F:/projects/biodiv/edit/imageAnalysis/Registration/homologous_points_pixel_filtered.txt"
+
+OutVector = "F:/projects/biodiv/edit/imageAnalysis/Registration/homologous_points.shp"
+
+#Wenn die geometrie entfernt wird kann GenerateRPCModel nur mit den Pixelkoordinaten rechnen
+
+test = image2image.ImageRegistration.PointExtraction(master, slave, 4, dem, PointsFile, OutVector, precision=0.1)
+test=image2image.ImageRegistration.map2pix(PointsFile, PixelPointsFile, master)
+test=image2image.ImageRegistration.GenerateRPCModel(slave,PixelPointsFile,StatsFile,'utm',32,True,32632,dem)
+
+#test=image2image.ImageRegistration.GenerateRPCModel(slave,PointsFile,StatsFile,'utm',32,True,32632,dem)
+test=image2image.ImageRegistration.FilterTiePoints(PixelPointsFile,StatsFile,FilteredPixelPointsFile,5)
+
+FilteredStatsFile = os.path.splitext(PointsFile)[0]+"_filtered.stats"
+test=image2image.ImageRegistration.GenerateRPCModel(slave,FilteredPixelPointsFile,FilteredStatsFile,'utm',32,True,32632,dem)
+
 
 #for file in files:
 #    basename=os.path.splitext(os.path.basename(file))[0]

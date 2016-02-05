@@ -30,8 +30,7 @@
   
 
   
-    <link rel="top" title="FEPy 0.0.1 documentation" href="index.html"/>
-        <link rel="prev" title="Modules" href="Modules.html"/> 
+    <link rel="top" title="FEPy 0.0.1 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -80,12 +79,11 @@
           
             
             
-                <ul class="current">
+                <ul>
 <li class="toctree-l1"><a class="reference internal" href="Intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation and Dependencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Structure.html">Module Structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Modules.html">Modules</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Import Module</a></li>
 </ul>
 
             
@@ -153,6 +151,7 @@
 </dd></dl>
 
 <span class="target" id="module-Import.fep_importL1B"></span><p>Import RapidEye L1B images</p>
+<p>This class imports the RapidEye L1B products performs RPC based orthorectification and clips the image to the defined AOI</p>
 <dl class="class">
 <dt id="Import.fep_importL1B.ImportL1B">
 <em class="property">class </em><code class="descclassname">Import.fep_importL1B.</code><code class="descname">ImportL1B</code><a class="headerlink" href="#Import.fep_importL1B.ImportL1B" title="Permalink to this definition">¶</a></dt>
@@ -165,8 +164,15 @@
 </dd></dl>
 
 <dl class="classmethod">
+<dt id="Import.fep_importL1B.ImportL1B.MultiLayerStack">
+<em class="property">classmethod </em><code class="descname">MultiLayerStack</code><span class="sig-paren">(</span><em>InRasters</em>, <em>OutRaster</em><span class="sig-paren">)</span><a class="headerlink" href="#Import.fep_importL1B.ImportL1B.MultiLayerStack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a multilayer stack
+:return:</p>
+</dd></dl>
+
+<dl class="classmethod">
 <dt id="Import.fep_importL1B.ImportL1B.OrthoRectifyRaster">
-<em class="property">classmethod </em><code class="descname">OrthoRectifyRaster</code><span class="sig-paren">(</span><em>InRaster</em>, <em>OutRaster</em>, <em>InDEM</em><span class="sig-paren">)</span><a class="headerlink" href="#Import.fep_importL1B.ImportL1B.OrthoRectifyRaster" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">OrthoRectifyRaster</code><span class="sig-paren">(</span><em>InRaster</em>, <em>OutRaster</em>, <em>InDEM</em>, <em>EPSG</em>, <em>AOI</em><span class="sig-paren">)</span><a class="headerlink" href="#Import.fep_importL1B.ImportL1B.OrthoRectifyRaster" title="Permalink to this definition">¶</a></dt>
 <dd><p>RPC based orthorectification</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -234,13 +240,6 @@
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="Modules.html" class="btn btn-neutral" title="Modules" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

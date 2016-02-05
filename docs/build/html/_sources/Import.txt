@@ -1,5 +1,5 @@
 Import Module
--------------
+=============
 The classes in this module provide functions for importing Satellite images
 
 .. automodule:: Import.read_xml_rapideye
