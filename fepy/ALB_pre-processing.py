@@ -6,7 +6,7 @@ import os
 import os.path
 from glob import glob
 from fepy.Ortho import Orthorectify_RapidEye_L1B
-from fepy.Registration import image2image
+from fepy.Registration import ImageRegistration
 
 
 files = []
@@ -38,15 +38,15 @@ OutVector = "F:/projects/biodiv/edit/imageAnalysis/Registration/homologous_point
 
 #Wenn die geometrie entfernt wird kann GenerateRPCModel nur mit den Pixelkoordinaten rechnen
 
-test = image2image.ImageRegistration.PointExtraction(master, slave, 4, dem, PointsFile, OutVector, precision=0.1)
-test=image2image.ImageRegistration.map2pix(PointsFile, PixelPointsFile, master)
-test=image2image.ImageRegistration.GenerateRPCModel(slave,PixelPointsFile,StatsFile,'utm',32,True,32632,dem)
+test = ImageRegistration.ImageRegistration.PointExtraction(master, slave, 4, dem, PointsFile, OutVector, precision=0.1)
+test=ImageRegistration.ImageRegistration.map2pix(PointsFile, PixelPointsFile, master)
+test=ImageRegistration.ImageRegistration.GenerateRPCModel(slave, PixelPointsFile, StatsFile, 'utm', 32, True, 32632, dem)
 
 #test=image2image.ImageRegistration.GenerateRPCModel(slave,PointsFile,StatsFile,'utm',32,True,32632,dem)
-test=image2image.ImageRegistration.FilterTiePoints(PixelPointsFile,StatsFile,FilteredPixelPointsFile,5)
+test=ImageRegistration.ImageRegistration.FilterTiePoints(PixelPointsFile, StatsFile, FilteredPixelPointsFile, 5)
 
 FilteredStatsFile = os.path.splitext(PointsFile)[0]+"_filtered.stats"
-test=image2image.ImageRegistration.GenerateRPCModel(slave,FilteredPixelPointsFile,FilteredStatsFile,'utm',32,True,32632,dem)
+test=ImageRegistration.ImageRegistration.GenerateRPCModel(slave, FilteredPixelPointsFile, FilteredStatsFile, 'utm', 32, True, 32632, dem)
 
 
 #for file in files:

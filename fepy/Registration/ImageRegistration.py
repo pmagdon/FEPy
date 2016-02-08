@@ -4,23 +4,11 @@ Image two image registration
 This class uses homologous points extraction and RPC Sensor modelling for image to image to image registration
 """
 
-# OTB Workflow for image matching
-# 
-# 
-#
-# Usage:
-# $ image2image.py <input1> <band1> <input2> <band2> <dem> <utm_zone> <northhem> <epsg> <precision>
-# <input1> is the slave image and <input2> is the master image.
-#
-# RapidEye example:
-# fep_image2image sub_5053018_2009-03-31_RE5_3A_151123.tif 4 sub_5053018_2012-10-02_RE3_3A_151123.tif 4 /srtm4 50 True 32650 50 5.0
-
 
 import sys
 import time
 import os
 import otbApplication
-import map2pix
 
 class ImageRegistration:
     @classmethod
@@ -71,11 +59,9 @@ class ImageRegistration:
         except:
             raise ImportError("Can not find module otbAbblication")
 
-        #Instance of the GenerateRPCSensorModel application
-        #GenerateRPCSensorModel = otbApplication.Registry.CreateApplication("GenerateRPCSensorModel")
 
         # Application parameters:
-        out_geom=ImageName+".geom"
+        out_geom=os.path.splitext(ImageName)[0]+".geom"
         GenerateRPCSensor = ['otbcli_GenerateRPCSensorModel','-outgeom',out_geom,'-inpoints',InputPoints,'-outstat',StatsFile,'-map', map,'-map.utm.zone',str(utmZone),'-map.utm.northhem','1','-map.epsg.code',str(epsg),'-elev.dem',dem]
 
         # Execute the application
@@ -150,7 +136,30 @@ class ImageRegistration:
 
         np.savetxt(OutputPointfile, data, delimiter='\t', fmt="%.12f")
         print "Coordinate transformation finished"
-
+    @classmethod
+    def orthorectify(cls,inraster, outraster,map,utmZone,north,epsg,dem):
+        OrthoRectification = otbApplication.Registry.CreateApplication("OrthoRectification")
+        out_geom=os.path.splitext(inraster)[0]+".geom"
+        #OrthoRectification.SetParameterString("io.in", inraster+"?&skipcarto=true")
+        OrthoRectification.SetParameterString("io.in", inraster+"?&geom"+out_geom)
+        OrthoRectification.SetParameterString("io.out", outraster)
+        OrthoRectification.SetParameterString("map",'utm')
+        OrthoRectification.SetParameterInt("map.utm.zone", utmZone)
+        if north:
+            OrthoRectification.SetParameterString("map.utm.northhem", "map.utm.northhem",north)
+        OrthoRectification.SetParameterInt("map.epsg.code", epsg)
+        OrthoRectification.SetParameterString("elev.dem",dem)
+        OrthoRectification.SetParameterString("outputs.mode","orthofit")
+        OrthoRectification.SetParameterString("outputs.ortho", inraster)
+        OrthoRectification.SetParameterString("interpolator","nn")
+        OrthoRectification.SetParameterFloat("opt.gridspacing",1)
+        start=time.time()
+        print "Starting OrthoRectification ........"
+        OrthoRectification.ExecuteAndWriteOutput()
+        print "OrthoRectification ........DONE"
+        end = time.time()
+        elapsed = end - start
+        print "Time taken: ", elapsed, "seconds."
 
 # Adding this allows to run the code as module as well as a script
 if __name__ == "__main__":
@@ -158,7 +167,6 @@ if __name__ == "__main__":
     import time
     import os
     import otbApplication
-    import map2pix
 
     parser = argparse.ArgumentParser(description='Process to extract homologous points from two image bands.')
     parser.add_argument("Master",action='store', help="Path to the master image")
@@ -175,7 +183,7 @@ if __name__ == "__main__":
     master = os.path.normpath(inputs.Maser)
     slave  = os.path.normpath(inputs.Slave)
     band = inputs.band
-    dem    = os.path.normpath(inputs.dem)
+    dem = os.path.normpath(inputs.dem)
     OutputPoints = os.path.normpath(inputs.OutPoints)
     OutVector = os.path.normpath(inputs.OutVector)
     precision=inputs.precision
@@ -194,38 +202,4 @@ if __name__ == "__main__":
     ImageRegistration.map2pix(OutPoints, PixelPoints, master)
     print "ConvertMapToImageCoordinates ........DONE"
 
-# # 2. Step
-#
-#
-# # Execute the application
-# print "Starting GenerateRPCSensorModel ........"
-# GenerateRPCSensorModel.ExecuteAndWriteOutput()
-# print "GenerateRPCSensorModel ........DONE"
-# end = time.time()
-# elapsed = end - start
-# print "Time taken: ", elapsed, "seconds."
-#
-# # 3. Step
-# # Instance of the OrthoRectification application
-# OrthoRectification = otbApplication.Registry.CreateApplication("OrthoRectification")
-#
-# # The following lines set all the application parameters:
-# OrthoRectification.SetParameterString("io.in", in1+"?&skipcarto=true")
-# OrthoRectification.SetParameterString("io.out", "ortho_"+in1)
-# OrthoRectification.SetParameterString("map","utm")
-# OrthoRectification.SetParameterInt("map.utm.zone", utm_zone)
-# OrthoRectification.SetParameterString("map.utm.northhem", "map.utm.northhem",utm_north)
-# OrthoRectification.SetParameterInt("map.epsg.code", epsg)
-# OrthoRectification.SetParameterString("elev.dem",dem)
-# OrthoRectification.SetParameterString("outputs.mode","orthofit")
-# OrthoRectification.SetParameterString("outputs.ortho", in1)
-# OrthoRectification.SetParameterString("interpolator","nn")
-# OrthoRectification.SetParameterFloat("opt.gridspacing",1)
-#
-# # The following line execute the application
-# print "Starting OrthoRectification ........"
-# OrthoRectification.ExecuteAndWriteOutput()
-# print "OrthoRectification ........DONE"
-# end = time.time()
-# elapsed = end - start
-# print "Time taken: ", elapsed, "seconds."
+
