@@ -9,6 +9,7 @@ from fepy.Ortho import Orthorectify_RapidEye_L1B
 from fepy.Registration import ImageRegistration
 
 
+
 files = []
 start_dir = "U:/data/raw/RapidEye/L1B/alb"
 pattern   = "*metadata.xml"
@@ -23,7 +24,6 @@ file=files[0]
 basename=os.path.splitext(os.path.basename(file))[0]
 outfile=(outdir+basename+'_L3A1.tif').replace("_metadata","")
 test=Orthorectify_RapidEye_L1B.PreProcess.PreProcess(file,outfile,dem,aoi)
-
 
 dem = "F:/projects/biodiv/final/raster/dem/alb/dtmAlb_clip_lat_long_wgs84.tif"
 master = "F:/projects/biodiv/edit/imageAnalysis/Registration/test/ALB_2015-08-08_sub.tif"
